@@ -21,10 +21,10 @@ class TestNetSalaryAPI:
 
     def test_bulk_api_with_excel(self, tmp_path):
         mock_data = {
-            "ID": [101, 102],
-            "Employee Name": ["Alice", "Bob"],
-            "Gross Salary": [18000000, 30000000],
-            "Number of Dependents": [0, 1]
+            "Employee ID": [101, 102],
+            "Name": ["Alice", "Bob"],
+            "Gross Income": [18000000, 30000000],
+            "Dependents": [0, 1]
         }
         df = pd.DataFrame(mock_data)
         file_path = tmp_path / "mock.xlsx"
@@ -48,6 +48,6 @@ class TestNetSalaryAPI:
             files={"file": ("bad.txt", b"not excel", "text/plain")}
         )
         assert res.status_code == 400
-        assert "Invalid file format" in res.json()["detail"]
+        assert "Invalid file type" in res.json()["detail"]
 
 #kiểm thử api
