@@ -38,7 +38,7 @@ class TestNetSalaryAPI:
 
         assert res.status_code == 200
         content = res.json()
-        assert "result" in content
+        assert "data" in content
         assert len(content["result"]) == 2
         assert content["result"][0]["employee_name"] == "Alice"
 
