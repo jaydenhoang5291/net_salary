@@ -51,7 +51,26 @@ if page == "Tính lương từng người":
 
 # ===== 2. TÍNH LƯƠNG HÀNG LOẠT =====
 elif page == "Tính lương hàng loạt":
+    st.subheader("📥 Tải file mẫu Excel")
+
+    template_df = pd.DataFrame({
+        "Name": ["Nguyễn Văn A", "Trần Thị B"],
+        "Gross Income": [12000000, 15000000],
+        "Dependents": [0, 1]
+    })
+
+    template_buf = io.BytesIO()
+    template_df.to_excel(template_buf, index=False)
+
+    st.download_button(
+        label="📎 Tải file mẫu",
+        data=template_buf.getvalue(),
+        file_name="mau_tinh_luong.xlsx",
+        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )
+
     st.subheader("📤 Upload file tính toán")
+    
     uploaded = st.file_uploader("Chọn file Excel", type=['xlsx'])
 
     if uploaded:
