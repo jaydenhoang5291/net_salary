@@ -5,6 +5,9 @@ import io
 
 st.set_page_config(page_title="Net Salary Tool", page_icon="🧾", layout="wide")
 
+# 🔧 Lấy URL API từ biến môi trường (Render: Settings > Environment > API_URL)
+API_URL = st.secrets["API_URL"]
+
 # Sidebar Navigation
 st.sidebar.title("📋 Chức năng")
 page = st.sidebar.radio("Đi tới", ["Tính lương từng người", "Tính lương hàng loạt"])
@@ -19,7 +22,7 @@ if page == "Tính lương từng người":
 
     if st.button("📤 Tính toán"):
         try:
-            res = requests.post("http://backend:8000/api/net/single",
+            res = requests.post(f"{API_URL}/api/net/single",
                                 json={
                                     "gross": gross, 
                                     "dependents": dependents
@@ -57,7 +60,7 @@ elif page == "Tính lương hàng loạt":
 
         if st.button("🚀 Bắt đầu tính lương"):
             try:
-                res = requests.post("http://backend:8000/api/net/batch",
+                res = requests.post(f"{API_URL}/api/net/batch",
                                     files={"file": (uploaded.name, uploaded.getvalue(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")})
                 if res.status_code == 200:
                     result = res.json()

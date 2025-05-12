@@ -1,7 +1,0 @@
-name: netease
-networks:
-  netease_network: {}
-
-include:
-  - ./services/backend.yaml
-  - ./services/frontend.yaml
