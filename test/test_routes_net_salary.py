@@ -44,7 +44,7 @@ class TestNetSalaryAPI:
 
     def test_bulk_api_invalid_file(self):
         res = client.post(
-            "/api/salary/upload",
+            "/salary/upload",
             files={"file": ("bad.txt", b"not excel", "text/plain")}
         )
         assert res.status_code == 400

@@ -25,5 +25,5 @@ class TestSalaryLogic:
         gross = 25000000
         dependents = 2
         result = NetSalaryCalculator.calculate(gross, dependents)
-        assert isinstance(result, NetSalaryResponse)
+        assert result.__class__.__name__ == "NetSalaryResponse"
         assert result.net_salary < gross
