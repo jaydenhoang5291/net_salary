@@ -5,7 +5,7 @@ from backend.services.calculator import NetSalaryCalculator
 import pandas as pd
 from io import BytesIO
 
-client = TestClient(app)
+client = TestClient(application)
 
 class TestNetSalaryAPI:
     def test_single_api_valid_request(self):
