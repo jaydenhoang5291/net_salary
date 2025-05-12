@@ -10,8 +10,8 @@ client = TestClient(application)
 class TestNetSalaryAPI:
     def test_single_api_valid_request(self):
         payload = {
-            "gross_salary": 25000000,
-            "number_of_dependents": 2
+            "gross": 25000000,
+            "dependents": 2
         }
         expected = NetSalaryCalculator.calculate(**payload)
         res = client.post("/api/salary/calculate", json=payload)
