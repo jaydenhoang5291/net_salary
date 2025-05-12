@@ -40,7 +40,7 @@ class TestNetSalaryAPI:
         content = res.json()
         assert "data" in content
         assert len(content["data"]) == 2
-        assert content["data"][0]["Name"] == "Alice"
+        assert content["data"][0]["name"] == "Alice"
 
     def test_bulk_api_invalid_file(self):
         res = client.post(
