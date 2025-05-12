@@ -2,11 +2,12 @@ import streamlit as st
 import pandas as pd
 import requests
 import io
+import os
 
 st.set_page_config(page_title="Net Salary Tool", page_icon="🧾", layout="wide")
 
 # 🔧 Lấy URL API từ biến môi trường (Render: Settings > Environment > API_URL)
-API_URL = st.secrets["API_URL"]
+API_URL = os.getenv("API_URL", "http://localhost:8000")
 
 # Sidebar Navigation
 st.sidebar.title("📋 Chức năng")
