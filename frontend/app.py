@@ -54,9 +54,12 @@ elif page == "Tính lương hàng loạt":
     st.subheader("📥 Tải file mẫu Excel")
 
     template_df = pd.DataFrame({
+        "Employee ID": [1, 2],
         "Name": ["Nguyễn Văn A", "Trần Thị B"],
         "Gross Income": [12000000, 15000000],
-        "Dependents": [0, 1]
+        "Dependents": [0, 1],
+        "Region": [1, 2],
+        "Net Salary": ["", ""]
     })
 
     template_buf = io.BytesIO()
