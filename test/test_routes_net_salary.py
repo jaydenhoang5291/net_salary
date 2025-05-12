@@ -1,6 +1,6 @@
 import pytest
 from fastapi.testclient import TestClient
-from backend.main import app
+from backend.main import application
 from backend.services.calculator import NetSalaryCalculator
 import pandas as pd
 from io import BytesIO
