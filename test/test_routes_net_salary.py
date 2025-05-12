@@ -14,7 +14,7 @@ class TestNetSalaryAPI:
             "dependents": 2
         }
         expected = NetSalaryCalculator.calculate(**payload)
-        res = client.post("/api/salary/calculate", json=payload)
+        res = client.post("/salary/calculate", json=payload)
         assert res.status_code == 200
         data = res.json()
         assert round(data["net_salary"], 2) == round(expected.net_salary, 2)
@@ -32,7 +32,7 @@ class TestNetSalaryAPI:
 
         with open(file_path, "rb") as f:
             res = client.post(
-                "/api/salary/upload",
+                "/salary/upload",
                 files={"file": ("mock.xlsx", f, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")}
             )
 
