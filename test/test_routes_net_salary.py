@@ -1,11 +1,11 @@
 import pytest
 from fastapi.testclient import TestClient
-from backend.main import application
+from backend.main import app
 from backend.services.calculator import NetSalaryCalculator
 import pandas as pd
 from io import BytesIO
 
-api = TestClient(application)
+client = TestClient(app)
 
 class TestNetSalaryAPI:
     def test_single_api_valid_request(self):
@@ -14,7 +14,7 @@ class TestNetSalaryAPI:
             "number_of_dependents": 2
         }
         expected = NetSalaryCalculator.calculate(**payload)
-        res = api.post("/api/salary/calculate", json=payload)
+        res = client.post("/api/salary/calculate", json=payload)
         assert res.status_code == 200
         data = res.json()
         assert round(data["net_salary"], 2) == round(expected.net_salary, 2)
@@ -31,7 +31,7 @@ class TestNetSalaryAPI:
         df.to_excel(file_path, index=False)
 
         with open(file_path, "rb") as f:
-            res = api.post(
+            res = client.post(
                 "/api/salary/upload",
                 files={"file": ("mock.xlsx", f, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")}
             )
@@ -43,7 +43,7 @@ class TestNetSalaryAPI:
         assert content["result"][0]["employee_name"] == "Alice"
 
     def test_bulk_api_invalid_file(self):
-        res = api.post(
+        res = client.post(
             "/api/salary/upload",
             files={"file": ("bad.txt", b"not excel", "text/plain")}
         )
