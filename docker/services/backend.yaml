@@ -1,0 +1,13 @@
+services:
+  backend:
+    build:
+      context: ../..
+      dockerfile: ./docker/backend.dockerfile
+    container_name: backend
+    restart: always
+    ports:
+      - "8000:8000"  # Dùng cổng 8000 cho backend
+    environment:
+      - BACKEND_URL=http://127.0.0.1:8000
+    networks:
+      - netease_network

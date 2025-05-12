@@ -1,0 +1,53 @@
+import pytest
+from fastapi.testclient import TestClient
+from backend.main import application
+from backend.services.calculator import NetSalaryCalculator
+import pandas as pd
+from io import BytesIO
+
+api = TestClient(application)
+
+class TestNetSalaryAPI:
+    def test_single_api_valid_request(self):
+        payload = {
+            "gross_salary": 25000000,
+            "number_of_dependents": 2
+        }
+        expected = NetSalaryCalculator.calculate(**payload)
+        res = api.post("/api/salary/calculate", json=payload)
+        assert res.status_code == 200
+        data = res.json()
+        assert round(data["net_salary"], 2) == round(expected.net_salary, 2)
+
+    def test_bulk_api_with_excel(self, tmp_path):
+        mock_data = {
+            "ID": [101, 102],
+            "Employee Name": ["Alice", "Bob"],
+            "Gross Salary": [18000000, 30000000],
+            "Number of Dependents": [0, 1]
+        }
+        df = pd.DataFrame(mock_data)
+        file_path = tmp_path / "mock.xlsx"
+        df.to_excel(file_path, index=False)
+
+        with open(file_path, "rb") as f:
+            res = api.post(
+                "/api/salary/upload",
+                files={"file": ("mock.xlsx", f, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")}
+            )
+
+        assert res.status_code == 200
+        content = res.json()
+        assert "result" in content
+        assert len(content["result"]) == 2
+        assert content["result"][0]["employee_name"] == "Alice"
+
+    def test_bulk_api_invalid_file(self):
+        res = api.post(
+            "/api/salary/upload",
+            files={"file": ("bad.txt", b"not excel", "text/plain")}
+        )
+        assert res.status_code == 400
+        assert "Invalid file format" in res.json()["detail"]
+
+#kiểm thử api
