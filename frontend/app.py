@@ -11,7 +11,7 @@ API_URL = os.getenv("API_URL", "http://localhost:8000")
 
 # Sidebar Navigation
 st.sidebar.title("📋 Chức năng")
-page = st.sidebar.radio("Đi tới", ["Tính lương từng người", "Tính lương hàng loạt"])
+page = st.sidebar.radio("", ["Tính lương từng người", "Tính lương hàng loạt"])
 
 st.title("💼 Ứng dụng tính lương NET")
 
