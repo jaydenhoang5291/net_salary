@@ -7,7 +7,6 @@ import uvicorn
 application = FastAPI(
     title="Net Salary Service",
     description="Service to estimate net salary from gross income",
-    version="1.1.0"
 )
 
 application.add_middleware(
