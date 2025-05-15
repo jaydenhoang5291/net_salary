@@ -6,8 +6,7 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Thêm python-multipart do bạn cần UploadFile
-RUN pip install --no-cache-dir -r requirements.txt \
-    && pip install --no-cache-dir python-multipart
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy source code sau cùng
 COPY . .
