@@ -119,32 +119,22 @@ This project uses a **CI/CD pipeline** to automate testing and deployment, ensur
 ### 🧪 Continuous Integration (CI)
 
 - GitHub Actions is configured via: ```.github/workflows/github-actions.yaml```
-
 - It runs on every push to the `main` branch and:
-- Installs required packages
-- Runs unit tests to verify code quality
+  - Installs required packages
+  - Runs unit tests to verify code quality
 
----
 
 ### 🚀 Continuous Deployment (CD)
 
 - **Render.com** is connected to the GitHub repository
 - Whenever new commits are pushed:
-- Render pulls the latest version
-- Rebuilds services using the provided `Dockerfile`
-- Deploys the updated backend and frontend containers
+  - Render pulls the latest version
+  - Rebuilds services using the provided `Dockerfile`
+  - Deploys the updated backend and frontend containers
 
 **Environment variables** are configured in the Render dashboard:
 - `API_URL` for frontend to connect to backend
 - `PYTHONPATH=/app` for backend to resolve internal modules
 
----
-
-### ✅ Result
-
-This CI/CD setup ensures that:
-- Code changes are always tested
-- The latest version is always deployed
-- Manual deployment effort is minimized
 
 
