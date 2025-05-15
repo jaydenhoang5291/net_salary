@@ -38,6 +38,8 @@ The system follows a basic **client-server architecture**, where:
      +--------------------------------+
 ```
 
+---
+
 ## 📁 Project Structure
 
 ```
@@ -64,6 +66,8 @@ test/
 docker-compose.yaml                    # Docker Compose to orchestrate backend & frontend
 README.md                              # Project documentation
 ```
+
+---
 
 ## 🚀 Deployment Guide
 
@@ -105,3 +109,42 @@ cd net_salary
 docker compose up -d
 ```
 - Access this link ```http://localhost:8501``` (Frontend (Streamlit UI))
+
+---
+
+## 🔄 CI/CD Workflow
+
+This project uses a **CI/CD pipeline** to automate testing and deployment, ensuring fast and reliable software delivery. The system integrates **GitHub Actions** for continuous integration and **Render.com** for continuous deployment.
+
+### 🧪 Continuous Integration (CI)
+
+- GitHub Actions is configured via: ```.github/workflows/github-actions.yaml```
+
+- It runs on every push to the `main` branch and:
+- Installs required packages
+- Runs unit tests to verify code quality
+
+---
+
+### 🚀 Continuous Deployment (CD)
+
+- **Render.com** is connected to the GitHub repository
+- Whenever new commits are pushed:
+- Render pulls the latest version
+- Rebuilds services using the provided `Dockerfile`
+- Deploys the updated backend and frontend containers
+
+**Environment variables** are configured in the Render dashboard:
+- `API_URL` for frontend to connect to backend
+- `PYTHONPATH=/app` for backend to resolve internal modules
+
+---
+
+### ✅ Result
+
+This CI/CD setup ensures that:
+- Code changes are always tested
+- The latest version is always deployed
+- Manual deployment effort is minimized
+
+
