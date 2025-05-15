@@ -1,8 +1,8 @@
 version: "3.9"
 
-services:
+services:         # tập hợp các container muốn chạy
   backend:
-    build: ./backend
+    build: ./backend                   # chỉ định thư mục chứa Dockerfile
     container_name: salary-backend
     ports:
       - "8000:8000"
@@ -13,4 +13,4 @@ services:
     ports:
       - "8501:8501"
     depends_on:
-      - backend
+      - backend     # Chạy backend trước rồi mới chạy frontend
